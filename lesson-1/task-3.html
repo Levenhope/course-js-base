@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const a = +prompt('Введите первое число', 0);
+        const operation = prompt('Назначьте операцию +, -, *, или /', '');
+        const b = +prompt('Введите второе число', 0);
+
+        function calcSum(a, b) {
+            return a + b;
+        }
+        function calcSubtract(a, b) {
+            return a - b;
+        }
+        function calcDivision(a, b) {
+            if(b === 0) return alert('Делить на ноль нельзя');
+            return a / b;
+        }
+        function calcMulti(a, b) {
+            return a * b;
+        }
+        function showResult(result) {
+            alert(`Результат равен ${result}`);
+        }
+
+        switch (operation) {
+            case '+':
+                showResult(calcSum(a, b));
+                break;
+            case '-':
+                showResult(calcSubtract(a, b));
+                break;
+            case '*':
+                showResult(calcMulti(a, b));
+                break;
+            case '/':
+                showResult(calcDivision(a, b));
+                break;
+            default:
+                alert('Назначена некорректная операция');
+                break;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function calcSum(a, b) {
+            return a + b;
+        }
+        function calcSubtract(a, b) {
+            return a - b;
+        }
+        function calcDivision(a, b) {
+            if(b === 0) return alert('Делить на ноль нельзя');
+            return a / b;
+        }
+        function calcMulti(a, b) {
+            return a * b;
+        }
+        function showResult(result) {
+            alert(`Результат равен ${result}`);
+        }
+
+        function initCalculator() {
+            let a = null,
+                b = null,
+                operation = null;
+
+            do {
+                if (a !== null) alert('Должно быть числом');
+                a = +prompt('Введите первое число', 0)
+            } while (isNaN(a));
+
+            do {
+                if (operation !== null) alert('Назначена некорректная операция');
+                operation = prompt('Назначьте операцию +, -, *, или /', '');
+            } while ((operation !== '+') && (operation !== '-') && (operation !== '*') && (operation !== '/'));
+
+            do {
+                if (b !== null) alert('Должно быть числом');
+                b = +prompt('Введите второе число', 0);
+            } while (isNaN(b));
+
+            switch (operation) {
+                case '+':
+                    showResult(calcSum(a, b));
+                    break;
+                case '-':
+                    showResult(calcSubtract(a, b));
+                    break;
+                case '*':
+                    showResult(calcMulti(a, b));
+                    break;
+                case '/':
+                    showResult(calcDivision(a, b));
+                    break;
+            }
+        }
+        initCalculator();
+    </script>
+</body>
+</html>
