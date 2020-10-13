@@ -12,16 +12,20 @@
         function calcSum(a, b) {
             return a + b;
         }
+
         function calcSubtract(a, b) {
             return a - b;
         }
+
         function calcDivision(a, b) {
-            if(b === 0) return alert('Делить на ноль нельзя');
+            if (b === 0) return alert('Делить на ноль нельзя');
             return a / b;
         }
+
         function calcMulti(a, b) {
             return a * b;
         }
+
         function showResult(result) {
             alert(`Результат равен ${result}`);
         }
@@ -32,35 +36,47 @@
                 operation = null;
 
             do {
-                if (a !== null) alert('Должно быть числом');
+                if (a !== null) {
+                    alert('Должно быть числом');
+                }
                 a = +prompt('Введите первое число', 0)
-            } while (isNaN(a));
+            } while ( isNaN(a) );
 
             do {
-                if (operation !== null) alert('Назначена некорректная операция');
+                if (operation !== null) {
+                    alert('Назначена некорректная операция');
+                }
                 operation = prompt('Назначьте операцию +, -, *, или /', '');
-            } while ((operation !== '+') && (operation !== '-') && (operation !== '*') && (operation !== '/'));
+            } while (
+                (operation !== '+') &&
+                (operation !== '-') &&
+                (operation !== '*') &&
+                (operation !== '/')
+            );
 
             do {
-                if (b !== null) alert('Должно быть числом');
+                if (b !== null) {
+                    alert('Должно быть числом');
+                }
                 b = +prompt('Введите второе число', 0);
-            } while (isNaN(b));
+            } while ( isNaN(b) );
 
             switch (operation) {
                 case '+':
-                    showResult(calcSum(a, b));
+                    showResult( calcSum(a, b) );
                     break;
                 case '-':
-                    showResult(calcSubtract(a, b));
+                    showResult( calcSubtract(a, b) );
                     break;
                 case '*':
-                    showResult(calcMulti(a, b));
+                    showResult( calcMulti(a, b) );
                     break;
                 case '/':
-                    showResult(calcDivision(a, b));
+                    showResult( calcDivision(a, b) );
                     break;
             }
         }
+
         initCalculator();
     </script>
 </body>
