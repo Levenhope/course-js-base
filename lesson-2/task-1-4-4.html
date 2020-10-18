@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function sumInput() {
+            let arr = [];
+            let a;
+            let sum = 0;
+
+            do {
+                a = prompt('Введите число', '');
+                if ((a !== '') && !isNaN(a) && (a !== null)) {
+                    arr.push(+a);
+                } else {
+                    break;
+                }
+            } while ( !isNaN(a) );
+
+            for (let num of arr) {
+                sum += num;
+            }
+
+            alert(sum);
+        }
+
+        sumInput();
+    </script>
+</body>
+</html>
