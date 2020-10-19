@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function minTwoDigits(value) {
+            return value.toString().length < 2 ? `0${value}` : value;
+        }
+
+        function formatDate(date) {
+            const now = new Date();
+            let diff = (now - date) / 1000;
+
+            if (diff < 1) {
+                return `прямо сейчас`;
+            } else if (diff < 60) {
+                return `${Math.round(diff)} сек. назад`;
+            } else if (diff < 3600) {
+                return `${Math.round(diff/60)} мин. назад`;
+            } else {
+                //"DD.MM.YY HH:mm"
+                return `${minTwoDigits(date.getDate())}.${minTwoDigits(date.getMonth())}.${date.getFullYear().toString().slice(2)} ${minTwoDigits(date.getHours())}:${minTwoDigits(date.getMinutes())}`;
+            }
+        }
+
+        alert( formatDate(new Date(new Date - 1)) ); // "прямо сейчас"
+
+        alert( formatDate(new Date(new Date - 30 * 1000)) ); // "30 сек. назад"
+
+        alert( formatDate(new Date(new Date - 5 * 60 * 1000)) ); // "5 мин. назад"
+
+        // вчерашняя дата вроде 31.12.2016, 20:00
+        alert( formatDate(new Date(new Date - 86400 * 1000)) );
+    </script>
+</body>
+</html>
