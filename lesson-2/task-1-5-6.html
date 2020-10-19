@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Calculator() {
+            this.methods = {
+                '+': (a, b) => a + b,
+                '-': (a, b) => a - b
+            };
+
+            this.calculate = function(str) {
+                str = str.split(' ');
+
+                if (str.length < 3) return 'Недостаточно данных';
+
+                const a = +str[0];
+                const b = +str[2];
+                const operation = str[1];
+
+                if (isNaN(a) || isNaN(b) || !this.methods[operation]) return 'Некорректные данные';
+
+                return this.methods[operation](a, b);
+            };
+
+            this.addMethod = function(name, func) {
+                this.methods[name] = func;
+            }
+        }
+
+        let powerCalc = new Calculator;
+        powerCalc.addMethod("*", (a, b) => a * b);
+        powerCalc.addMethod("/", (a, b) => a / b);
+        powerCalc.addMethod("**", (a, b) => a ** b);
+
+        let result = powerCalc.calculate("2 ** 3");
+        alert( result ); // 8
+    </script>
+</body>
+</html>
