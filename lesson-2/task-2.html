@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let testArray = [0, 1, 2, 3, 4, 5];
+
+        function fakeSplice(arr, index, deleteCount, ...elements) {
+            const isDeleteCount = deleteCount > 0;
+
+            if (isDeleteCount) {
+                let indexCounter = index;
+                let firstAfterDelete = index + deleteCount;
+                for (let i = firstAfterDelete; i < arr.length; i++) {
+                    arr[indexCounter++] = arr[i];
+                }
+                if (index + deleteCount < arr.length) {
+                    arr.length -= deleteCount;
+                } else {
+                    for (let i = 0; i < arr.length - index + 1; i++) {
+                        arr.pop();
+                    }
+                }
+            }
+
+            if (elements.length > 0) {
+                let arrayPartAfter = [];
+                let counterStart = !isDeleteCount ? index : index - 1;
+                for (let i = counterStart; i < arr.length; i++) {
+                    arrayPartAfter.push(arr.pop());
+                }
+                arr = arr.concat(elements, arrayPartAfter.reverse());
+            }
+
+            return arr;
+        }
+
+        alert( fakeSplice(testArray, 3, 1, 32, 83) );
+    </script>
+</body>
+</html>
