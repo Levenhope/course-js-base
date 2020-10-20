@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function byField(fieldName) {
+            return function(a, b) {
+                return a[fieldName] > b[fieldName] ? 1 : -1
+            }
+        }
+
+        let users = [
+            { name: "John", age: 20, surname: "Johnson" },
+            { name: "Pete", age: 18, surname: "Peterson" },
+            { name: "Ann", age: 19, surname: "Hathaway" }
+        ];
+
+        alert( JSON.stringify( users.sort( byField('name') ) ) );
+        alert( JSON.stringify( users.sort( byField('age') ) ) );
+    </script>
+</body>
+</html>
