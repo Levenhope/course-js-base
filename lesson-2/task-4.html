@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const DAY_IN_MILLISECONDS = 8.64e+7;
+        const source = prompt('Введите дату своего рождения в формате ДД.ММ.ГГ.', '').split('.');
+        const year = +source[2] < 20 ? 2000 + +source[2] : 1900 + +source[2];
+        const month = +source[1] - 1;
+        const day = +source[0];
+        const today = new Date();
+        const isBirthdayPassed = month < today.getMonth();
+        const birthday = new Date(isBirthdayPassed ? today.getFullYear() + 1 : today.getFullYear(), month, day);
+
+        if(birthday.getDate() === today.getDate() && birthday.getMonth() === today.getMonth()) {
+            alert (`Ваш возраст: ${today.getFullYear() - year}. С днем рождения! 🎉`);
+        } else {
+            const age = isBirthdayPassed ? today.getFullYear() - year : today.getFullYear() - year - 1;
+            const daysLeft = Math.abs(Math.round((today - birthday) / DAY_IN_MILLISECONDS));
+            alert (`Ваш возраст: ${age}. До вашего дня рождения осталось ${daysLeft} дней`);
+        }
+    </script>
+</body>
+</html>
