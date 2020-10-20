@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Accumulator(startingValue) {
+            this.value = startingValue;
+
+            this.read = function() {
+                this.value += +prompt('Введите значение', 0);
+            };
+        }
+
+        let accumulator = new Accumulator(1); // начальное значение 1
+
+        accumulator.read(); // прибавит ввод prompt к текущему значению
+        accumulator.read(); // прибавит ввод prompt к текущему значению
+
+        alert(accumulator.value); // выведет сумму этих значений
+    </script>
+</body>
+</html>
