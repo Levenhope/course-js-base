@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function throttle(f, ms) {
+            let pause = false;
+
+            function wrapper() {
+                if (pause) {
+                    wrapper.lastPoint.args = arguments;
+                    wrapper.lastPoint.this = this;
+                    return;
+                }
+
+                f.apply(this, arguments);
+
+                pause = true;
+
+                setTimeout(function () {
+                    pause = false;
+                    if (wrapper.lastPoint.args) {
+                        wrapper.apply(wrapper.lastPoint.this, wrapper.lastPoint.args);
+                        wrapper.lastPoint = {};
+                    }
+                }, ms);
+
+            }
+
+            wrapper.lastPoint = {};
+
+            return wrapper;
+        }
+
+        function f(a) {
+            console.log(a)
+        }
+
+        // f1000 передаёт вызовы f максимум раз в 1000 мс
+        let f1000 = throttle(f, 1000);
+
+        f1000(1); // показывает 1
+        f1000(2); // (ограничение, 1000 мс ещё нет)
+        f1000(3); // (ограничение, 1000 мс ещё нет)
+
+        // когда 1000 мс истекли ...
+        // ...выводим 3, промежуточное значение 2 было проигнорировано
+    </script>
+</body>
+</html>
