@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let room = {
+            number: 23
+        };
+
+        let meetup = {
+            title: "Совещание",
+            occupiedBy: [{name: "Иванов"}, {name: "Петров"}],
+            place: room
+        };
+
+        // цикличные ссылки
+        room.occupiedBy = meetup;
+        meetup.self = meetup;
+
+        alert( JSON.stringify(meetup, function replacer(key, value) {
+            return (key !== "" && value === meetup) ? undefined : value;
+        }, 2));
+
+        /* в результате должно быть:
+        {
+          "title":"Совещание",
+          "occupiedBy":[{"name":"Иванов"},{"name":"Петров"}],
+          "place":{"number":23}
+        }
+        */
+    </script>
+</body>
+</html>

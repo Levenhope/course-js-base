@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function printNumbersInterval(from, to) {
+            let counter = from;
+            let counterInterval = setInterval(function() {
+                alert(counter);
+                if (counter++ === to) clearInterval(counterInterval);
+            }, 1000);
+        }
+        function printNumbersTimeout(from, to) {
+            let counter = from;
+            setTimeout(function counterFunction() {
+                if (counter !== to + 1) {
+                    alert(counter++);
+                    setTimeout(counterFunction, 1000);
+                }
+            }, 1000);
+        }
+
+        //printNumbersInterval(1, 4);
+        printNumbersTimeout(2, 5);
+    </script>
+</body>
+</html>
