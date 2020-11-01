@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<script>
+    let testElement = document.createElement('div');
+    testElement.style.width = '50px';
+    testElement.style.height = '50px';
+    testElement.style.overflow = 'scroll';
+
+    document.body.append(testElement);
+
+    alert(`Ширина скроллбара: ${testElement.offsetWidth - testElement.clientWidth}`);
+
+    testElement.remove();
+</script>
+
+</body>
+</html>
