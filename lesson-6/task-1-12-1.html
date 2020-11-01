@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            padding: 20px 0 0 20px;
+            cursor: pointer;
+        }
+
+        #field {
+            overflow: hidden;
+            width: 200px;
+            height: 150px;
+            border-top: 10px solid black;
+            border-right: 10px solid gray;
+            border-bottom: 10px solid gray;
+            border-left: 10px solid black;
+            background-color: #00FF00;
+            font: 10px/1.2 monospace;
+        }
+
+        .triangle-right {
+            position: relative;
+            width: 0;
+            height: 0;
+            border-top: 6px solid transparent;
+            border-bottom: 6px solid transparent;
+            border-left: 20px solid red;
+            text-indent: -20px;
+            font: 12px/1 monospace;
+        }
+    </style>
+    <script>
+        document.onclick = function(e) { // показывает координаты точки клика
+            let coordsParams = field.getBoundingClientRect();
+            currentCoords.textContent = e.clientX + ':' + e.clientY;
+            coords.rows[0].cells[1].textContent = `x:${coordsParams.left} y:${coordsParams.top}`;
+            coords.rows[1].cells[1].textContent = `x:${coordsParams.right} y:${coordsParams.bottom}`;
+            coords.rows[2].cells[1].textContent = `x:${coordsParams.left + field.clientLeft} y:${coordsParams.top + field.clientTop}`;
+            coords.rows[3].cells[1].textContent = `x:${coordsParams.left + field.clientLeft + field.clientWidth} y:${coordsParams.top + field.clientTop + field.clientHeight}`;
+        };
+    </script>
+</head>
+
+<body>
+
+Кликните в любом месте для получения координат в контексте окна.
+<br> Это для тестирования, чтобы проверить результат, который вы получили с помощью JavaScript.
+<br>
+<p>Координаты курсора: <span id="currentCoords"></span></p>
+<table id="coords">
+    <tr>
+        <td>Координаты точки 1:</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Координаты точки 2:</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Координаты точки 3:</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Координаты точки 4:</td>
+        <td></td>
+    </tr>
+</table>
+
+
+<div id="field">
+    . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+</div>
+
+
+<div class="triangle-right" style="left:-20px;top:-176px">1</div>
+<div class="triangle-right" style="left:-10px;top:-178px">3</div>
+<div class="triangle-right" style="left:190px;top:-40px">4</div>
+<div class="triangle-right" style="left:200px;top:-42px">2</div>
+
+
+</body>
+</html>
