@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function createList() {
+            const listElement = document.createElement('ol');
+            let newListItemContent;
+
+            do {
+                let li = document.createElement('li');
+                newListItemContent = prompt('Введите содержимое для пункта списка', '');
+                if (newListItemContent == null) break;
+                li.textContent = newListItemContent;
+                listElement.append(li);
+            } while (newListItemContent != null);
+
+            document.body.prepend(listElement);
+        }
+
+        createList();
+    </script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="cal"></div>
+    <script>
+        function createCalendar(elem, year, month) {
+            let table = document.createElement('table');
+            let date = new Date(year, month-1);
+            let weekDays = ['пн', 'вт', 'cр', 'чт', 'пт', 'сб', 'вс'];
+            let startDay = date.getUTCDay();
+            let headingRow = document.createElement('tr');
+            let daysInMonth = function() {
+                const DAY_IN_MS = 8.64e+7;
+                const nextMonth = new Date(year, month + 1);
+                return (nextMonth - date) / DAY_IN_MS;
+            };
+            let weeksInMonth = function() {
+                return daysInMonth() % 7;
+            };
+            let daysCounter = 1;
+
+            table.border = 1;
+            table.cellSpacing = 0;
+
+            for (let i = 0; i < weeksInMonth(); i++) {
+                let tr = document.createElement('tr');
+
+                for (let j = 0; j < 7; j++) {
+                    let td = document.createElement('td');
+                    tr.append(td);
+                }
+
+                table.append(tr);
+            }
+
+            Array.from(table.rows).forEach(function (row, index) {
+                if (index === 0) {
+                    for (let i = startDay; i < 7; i++) {
+                        row.cells[i].textContent = `${daysCounter++}`;
+                    }
+                } else {
+                    for (let i = 0; i < 7; i++) {
+                        row.cells[i].textContent = `${daysCounter++}`;
+                    }
+                }
+            });
+
+            for (let i = 0; i < 7; i++) {
+                let headingElement = document.createElement('th');
+                headingElement.textContent = weekDays[i];
+                headingRow.append(headingElement);
+            }
+            table.prepend(headingRow);
+
+            elem.append(table);
+        }
+
+        createCalendar(cal, 2012, 9);
+    </script>
+</body>
+</html>

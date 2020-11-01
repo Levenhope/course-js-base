@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<table id="table" border="1" cellspacing="0">
+    <tr>
+        <th>Имя</th>
+        <th>Фамилия</th>
+        <th>Возраст</th>
+    </tr>
+    <tr>
+        <td>John</td>
+        <td>Smith</td>
+        <td>10</td>
+    </tr>
+    <tr>
+        <td>Pete</td>
+        <td>Brown</td>
+        <td>15</td>
+    </tr>
+    <tr>
+        <td>Ann</td>
+        <td>Lee</td>
+        <td>5</td>
+    </tr>
+</table>
+
+<script>
+    let people = [];
+
+    for (let i = 0; i < table.rows.length - 1; i++) {
+        people[i] = {
+            firstName: table.rows[i+1].cells[0].textContent,
+            lastName: table.rows[i+1].cells[1].textContent,
+            age: table.rows[i+1].cells[2].textContent,
+        };
+    }
+
+    people.sort(function(a, b) {
+        return a.firstName > b.firstName ? 1 : -1
+    });
+
+    for (let i = 0; i < table.rows.length - 1; i++) {
+        table.rows[i+1].cells[0].textContent = people[i].firstName;
+        table.rows[i+1].cells[1].textContent = people[i].lastName;
+        table.rows[i+1].cells[2].textContent = people[i].age;
+    }
+</script>
+
+</body>
+</html>

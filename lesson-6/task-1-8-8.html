@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .hours {
+            color: red;
+        }
+        .minutes {
+            color: green;
+        }
+        .seconds {
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+
+<!-- клик по этой кнопке вызовет clockStart() -->
+<input type="button" onclick="clockStart()" value="Старт">
+
+<!-- клик по этой кнопке вызовет clockStop() -->
+<input type="button" onclick="clockStop()" value="Стоп">
+
+
+<script>
+    let clockContainer = document.createElement('div');
+    let clockHours = document.createElement('span');
+    clockHours.className = 'hours';
+    clockContainer.append(clockHours);
+    let clockMinutes = document.createElement('span');
+    clockMinutes.className = 'minutes';
+    clockContainer.append(clockMinutes);
+    let clockSeconds = document.createElement('span');
+    clockSeconds.className = 'seconds';
+    clockContainer.append(clockSeconds);
+    let clockInterval;
+
+    document.body.prepend(clockContainer);
+
+    function clockUpdate() {
+        const date = new Date();
+        clockHours.textContent = `${date.toLocaleString('ru-RU', {hour: '2-digit'})}:`;
+        clockMinutes.textContent = `${date.toLocaleString('ru-RU', {minute: '2-digit'})}:`;
+        clockSeconds.textContent = `${date.toLocaleString('ru-RU', {second: '2-digit'})}`;
+    }
+
+    function clockStart() {
+        clockInterval = setInterval(clockUpdate, 1000);
+        clockUpdate();
+    }
+    function clockStop() {
+        clearInterval(clockInterval);
+        clockInterval = null;
+    }
+</script>
+</body>
+</html>
