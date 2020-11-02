@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #menu {
+            display: none;
+            margin: 0.6rem 0;
+            padding-left: 1.2rem;
+            list-style: none;
+            user-select: none;
+        }
+        #menu.is-visible {
+            display: block;
+        }
+        #toggler {
+            display: inline-block;
+            cursor: pointer;
+        }
+        #togglerIcon {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+<span id="toggler"><span id="togglerIcon">▶</span> Сладости (нажми меня)!</span>
+
+<ul id="menu">
+    <li>Пирожное</li>
+    <li>Пончик</li>
+    <li>Мёд</li>
+</ul>
+
+    <script>
+        toggler.onclick = function () {
+            menu.classList.toggle('is-visible');
+
+            if (menu.classList.contains('is-visible')) {
+                togglerIcon.textContent = '▼';
+            } else {
+                togglerIcon.textContent = '▶';
+            }
+        }
+    </script>
+</body>
+</html>

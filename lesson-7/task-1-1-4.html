@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #field {
+            position: relative;
+            width: 200px;
+            height: 150px;
+            border: 10px solid black;
+            background-color: #00FF00;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        #ball {
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: top ease .3s, left ease .3s;
+        }
+    </style>
+</head>
+<body style="height:2000px">
+
+Нажмите на поле для перемещения мяча.
+<br> Мяч не должен выходить за границы поля.
+
+
+<div id="field">
+    <img src="https://ru.js.cx/clipart/ball.svg" width="40" height="40" id="ball">. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+</div>
+<script>
+    field.onclick = function(e) {
+        const coords = field.getBoundingClientRect();
+
+        const relativeClientX = e.clientX - coords.left - field.clientLeft;
+        const relativeClientY = e.clientY - coords.top - field.clientTop;
+
+        let destX = relativeClientX - ball.clientWidth/2;
+        let destY = relativeClientY - ball.clientWidth/2;
+
+        const isFarLeft = destX < 0;
+        const isFarRight = destX > field.clientWidth - ball.clientWidth;
+        const isFarTop = destY < 0;
+        const isFarBottom = destY > field.clientHeight - ball.clientHeight;
+
+        if (isFarLeft) {
+            destX = 0;
+        } else if (isFarRight) {
+            destX = field.clientWidth - ball.clientWidth;
+        }
+
+        if (isFarTop) {
+            destY = 0;
+        } else if (isFarBottom) {
+            destY = field.clientHeight - ball.clientHeight;
+        }
+
+        ball.style.left = `${destX}px`;
+        ball.style.top = `${destY}px`;
+    }
+</script>
+
+</body>
+</html>

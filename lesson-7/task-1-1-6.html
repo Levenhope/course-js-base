@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .remove-button {
+            position: absolute;
+            font-size: 110%;
+            top: 0;
+            color: darkred;
+            right: 10px;
+            display: block;
+            width: 24px;
+            height: 24px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+        }
+        .pane {
+            background: #edf5e1;
+            padding: 10px 20px 10px;
+            border-top: solid 2px #c4df9b;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <div class="pane">
+        <h3>Лошадь</h3>
+        <p>Домашняя лошадь — животное семейства непарнокопытных, одомашненный и единственный сохранившийся подвид дикой лошади, вымершей в дикой природе, за исключением небольшой популяции лошади Пржевальского.</p>
+    </div>
+    <div class="pane">
+        <h3>Осёл</h3>
+        <p>Домашний осёл (лат. Equus asinus asinus), или ишак, — одомашненный подвид дикого осла (Equus asinus), сыгравший важную историческую роль в развитии хозяйства и культуры человека и по-прежнему широко в хозяйстве многих развивающихся стран.</p>
+    </div>
+    <div class="pane">
+        <h3>Кошка</h3>
+        <p>Кошка, или домашняя кошка (лат. Felis silvestris catus), — домашнее животное, одно из наиболее популярных(наряду с собакой) «животных-компаньонов». Являясь одиночным охотником на грызунов и других мелких животных, кошка — социальное животное, использующее для общения широкий диапазон звуковых сигналов.</p>
+    </div>
+</div>
+
+<script>
+    const panes = document.querySelectorAll('.pane');
+    Array.from(panes).forEach((pane) => {pane.insertAdjacentHTML('beforeend', `<button class="remove-button" onclick="this.closest('.pane').remove()">[x]</button>`)});
+</script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .carousel {
+            position: relative;
+            width: 390px;
+            margin: auto;
+            overflow: hidden;
+        }
+        .arrow {
+            position: absolute;
+            z-index: 10;
+            top: 50%;
+            display: block;
+            width: 1.5rem;
+            height: 1.5rem;
+            padding: 0;
+            text-align: center;
+            transform: translateY(-50%);
+            border-radius: 100%;
+            cursor: pointer;
+        }
+        .arrow.is-prev {
+            left: 0;
+        }
+        .arrow.is-next {
+            right: 0;
+        }
+        .list {
+            display: flex;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            transform: translateX(0);
+            transition: transform ease .35s;
+        }
+        .list li {
+            width: 130px;
+            flex-shrink: 0;
+        }
+        .list li img {
+            display: block;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="carousel">
+        <button class="arrow is-prev">⇦</button>
+        <button class="arrow is-next">⇨</button>
+
+        <ul class="list">
+            <li><img src="https://ru.js.cx/carousel/1.png"></li>
+            <li><img src="https://ru.js.cx/carousel/2.png"></li>
+            <li><img src="https://ru.js.cx/carousel/3.png"></li>
+            <li><img src="https://ru.js.cx/carousel/4.png"></li>
+            <li><img src="https://ru.js.cx/carousel/5.png"></li>
+            <li><img src="https://ru.js.cx/carousel/6.png"></li>
+            <li><img src="https://ru.js.cx/carousel/7.png"></li>
+            <li><img src="https://ru.js.cx/carousel/8.png"></li>
+            <li><img src="https://ru.js.cx/carousel/9.png"></li>
+            <li><img src="https://ru.js.cx/carousel/10.png"></li>
+        </ul>
+    </div>
+    <script>
+        const arrowPrev = document.querySelector('.arrow.is-prev');
+        const arrowNext = document.querySelector('.arrow.is-next');
+        const list = document.querySelector('.list');
+        const slides = document.querySelectorAll('.list li');
+
+        let currentSlide = 0;
+
+        arrowNext.onclick = function () {
+            if (currentSlide === slides.length - 3) return;
+            currentSlide = currentSlide + 3 >= slides.length - 1 ? slides.length - 3 : currentSlide + 3;
+
+            list.style.transform = `translateX(${-Array.from(slides)[currentSlide].offsetLeft}px)`;
+        };
+
+        arrowPrev.onclick = function () {
+            if (currentSlide === 0) return;
+            currentSlide = currentSlide - 3 <= 0 ? 0 : currentSlide - 3;
+
+            list.style.transform = `translateX(${-Array.from(slides)[currentSlide].offsetLeft}px)`;
+        };
+    </script>
+</body>
+</html>
