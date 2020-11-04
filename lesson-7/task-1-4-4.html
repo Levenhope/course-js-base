@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            height: 2000px;
+            /* добавим body прокрутку, подсказка должна работать и с прокруткой */
+        }
+
+        .tooltip {
+            /* немного стилизуем подсказку, можете использовать свои стили вместо этих */
+            position: fixed;
+            padding: 10px 20px;
+            border: 1px solid #b3c9ce;
+            border-radius: 4px;
+            text-align: center;
+            font: italic 14px/1.3 sans-serif;
+            color: #333;
+            background: #fff;
+            box-shadow: 3px 3px 3px rgba(0, 0, 0, .3);
+        }
+    </style>
+</head>
+<body>
+<p>ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя</p>
+<p>ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя</p>
+
+<button data-tooltip="эта подсказка должна быть длиннее, чем элемент">Короткая кнопка</button>
+<button data-tooltip="HTML<br>подсказка">Ещё кнопка</button>
+
+<p>Прокрутите страницу, чтобы кнопки оказались у верхнего края, а затем проверьте правильно ли выводятся подсказки.</p>
+
+
+<script>
+    function removeExistingTooltip() {
+        let existingTooltip = document.querySelector('.tooltip');
+
+        if (existingTooltip) {
+            let sourceElement = document.querySelector('.tooltip-source');
+            existingTooltip.remove();
+            sourceElement.removeEventListener('mouseleave', removeExistingTooltip);
+            sourceElement.classList.remove('tooltip-source');
+        }
+    }
+    document.addEventListener('mouseover', function(e) {
+        let tooltipedElement = e.target.closest('[data-tooltip]');
+
+        if (!tooltipedElement) return;
+
+        let coords = tooltipedElement.getBoundingClientRect();
+        let tooltip = document.createElement('div');
+
+        tooltip.className = 'tooltip';
+        tooltip.innerHTML = tooltipedElement.dataset.tooltip;
+        document.body.append(tooltip);
+
+        let positionLeft = coords.left + tooltipedElement.clientWidth/2 - tooltip.clientWidth/2;
+        let positionTop = coords.top - tooltip.clientHeight - 5;
+
+        tooltip.style.left = `${positionLeft < 0 ? 5 : positionLeft}px`;
+        tooltip.style.top = `${positionTop < 0 ? coords.bottom + 5 : positionTop}px`;
+
+        tooltipedElement.classList.add('tooltip-source');
+        tooltipedElement.addEventListener('mouseleave', removeExistingTooltip);
+    });
+</script>
+</body>
+</html>

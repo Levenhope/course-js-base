@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 4px;
+        }
+        th {
+            cursor: pointer;
+        }
+        th:hover {
+            background: yellow;
+        }
+    </style>
+</head>
+<body>
+<table id="grid">
+    <thead>
+    <tr>
+        <th data-type="number">Возраст</th>
+        <th data-type="string">Имя</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>5</td>
+        <td>Вася</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>Петя</td>
+    </tr>
+    <tr>
+        <td>12</td>
+        <td>Женя</td>
+    </tr>
+    <tr>
+        <td>9</td>
+        <td>Маша</td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>Илья</td>
+    </tr>
+    </tbody>
+</table>
+<script>
+    function byField(fieldName) {
+        return function(a, b) {
+            return a[fieldName] > b[fieldName] ? 1 : -1
+        }
+    }
+    grid.addEventListener('click', function (e) {
+        let th = e.target.closest('th');
+        let dataType = th.dataset.type;
+
+        if (!th) return;
+
+        if (!grid.contains(th)) return;
+
+        let sortedRows;
+
+        if (dataType === 'number') {
+            sortedRows = Array.from(grid.rows)
+                .slice(1)
+                .sort((rowA, rowB) => rowA.cells[0].innerHTML - rowB.cells[0].innerHTML);
+        } else if (dataType === 'string') {
+            sortedRows = Array.from(grid.rows)
+                .slice(1)
+                .sort((rowA, rowB) => rowA.cells[1].innerHTML > rowB.cells[1].innerHTML ? 1 : -1);
+        }
+
+        grid.tBodies[0].append(...sortedRows);
+    });
+</script>
+</body>
+</html>
