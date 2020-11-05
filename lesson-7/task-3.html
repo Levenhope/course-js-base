@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div id="chat"></div>
+<script>
+    // Добавить в обработчик для кнопки из задания 2 запись создать div, внутрь него записать текст и input, и добавить созданный div в div#chat.
+    //     Т.е. если мы набрали в input текст “привет!”, при клике на кнопку button дом дерево должно стать
+    //
+    //
+    // <form action="error.html">
+    //     <input type="text" value="">
+    //     <button type="submit"></button>
+    //     </form>
+    //     <div id="chat">
+    //     <div>Привет!</div>
+    // </div>
+
+
+    let form = document.createElement('form');
+    form.action = 'error.html';
+    document.body.prepend(form);
+
+    let input = document.createElement('input');
+    form.append(input);
+
+    let button = document.createElement('button');
+    button.type = 'submit';
+    button.textContent = 'submit';
+    form.append(button);
+
+    form.onsubmit = function (e) {
+        e.preventDefault();
+        let message = document.createElement('div');
+        message.textContent = input.value;
+        chat.append(message);
+
+        input.value = '';
+    }
+</script>
+</body>
+</html>
