@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #field {
+            background: url(https://js.cx/drag-heroes/field.png);
+            width: 800px;
+            height: 600px;
+            float: left;
+        }
+
+        /* герои и мяч (переносимые элементы) */
+
+        .hero {
+            background: url(https://js.cx/drag-heroes/heroes.png);
+            width: 130px;
+            height: 128px;
+            float: left;
+        }
+
+        #hero1 {
+            background-position: 0 0;
+        }
+
+        #hero2 {
+            background-position: 0 -128px;
+        }
+
+        #hero3 {
+            background-position: -120px 0;
+        }
+
+        #hero4 {
+            background-position: -125px -128px;
+        }
+
+        #hero5 {
+            background-position: -248px -128px;
+        }
+
+        #hero6 {
+            background-position: -244px 0;
+        }
+
+        .draggable {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<h2>Расставьте супергероев по полю.</h2>
+
+<p>Супергерои и мяч - это элементы с классом "draggable". Сделайте так, чтобы их можно было переносить.</p>
+
+<p>Важно: ограничить перетаскивание границами окна. Если супергероя подносят к верхней или нижней границе страницы, она должна автоматически прокручиваться.</p>
+
+<p>Если страница помещается на вашем экране целиком и не имеет вертикальной прокрутки -- сделайте окно браузера меньше, чтобы протестировать эту возможность.</p>
+
+<p>В этой задаче достаточно справиться с вертикальной прокруткой. Обычно нет горизонтальной прокрутки, и она обрабатывается аналогичным образом, если это необходимо.</p>
+
+<p>Да, и ещё: супергерои ни при каких условиях не должны попасть за край экрана.</p>
+
+<div id="field">
+
+</div>
+
+<div class="hero draggable" id="hero1"></div>
+<div class="hero draggable" id="hero2"></div>
+<div class="hero draggable" id="hero3"></div>
+<div class="hero draggable" id="hero4"></div>
+<div class="hero draggable" id="hero5"></div>
+<div class="hero draggable" id="hero6"></div>
+
+<img src="https://en.js.cx/clipart/ball.svg" class="draggable">
+
+<div style="clear:both"></div>
+
+<script>
+    document.onmousedown = function(e) {
+        let elementToMove = e.target.closest('.draggable');
+
+        if (!elementToMove) return;
+
+        let shiftX = e.clientX - elementToMove.getBoundingClientRect().left;
+        let shiftY = e.clientY - elementToMove.getBoundingClientRect().top;
+
+        elementToMove.style.position = 'absolute';
+
+        moveAt(e.pageX - shiftX, e.pageY - shiftY);
+
+        function moveAt(pageX, pageY) {
+            elementToMove.style.left = `${pageX}px`;
+            elementToMove.style.top = `${pageY}px`;
+        }
+
+        function onMouseMove(e) {
+            let destX = e.pageX - shiftX;
+            let destY = e.pageY - shiftY;
+
+            if (destX < 0) {
+                destX = 0;
+            } else if (destX + elementToMove.clientWidth > document.body.clientWidth) {
+                destX = document.body.clientWidth - elementToMove.clientWidth;
+            }
+
+            if (destY < 0) {
+                destY = 0;
+            } else if (destY + elementToMove.clientHeight > document.body.clientHeight) {
+                destY = document.body.clientHeight - elementToMove.clientHeight;
+            }
+
+            moveAt(destX, destY);
+        }
+
+        document.addEventListener('mousemove', onMouseMove);
+
+        document.onmouseup = function() {
+            document.removeEventListener('mousemove', onMouseMove);
+            elementToMove.onmouseup = null;
+        };
+
+    };
+
+    document.ondragstart = function() {
+        return false;
+    };
+</script>
+</body>
+</html>

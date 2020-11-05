@@ -9,13 +9,15 @@
     <style>
         body {
             height: 2000px;
-            /* добавим body прокрутку, подсказка должна работать и с прокруткой */
+            /* подсказка должна работать и после прокрутки страницы */
         }
 
         .tooltip {
-            /* немного стилизуем подсказку, можете использовать свои стили вместо этих */
             position: fixed;
+            z-index: 100;
+
             padding: 10px 20px;
+
             border: 1px solid #b3c9ce;
             border-radius: 4px;
             text-align: center;
@@ -24,17 +26,41 @@
             background: #fff;
             box-shadow: 3px 3px 3px rgba(0, 0, 0, .3);
         }
+
+        #house {
+            margin-top: 50px;
+            width: 400px;
+            border: 1px solid brown;
+        }
+
+        #roof {
+            width: 0;
+            height: 0;
+            border-left: 200px solid transparent;
+            border-right: 200px solid transparent;
+            border-bottom: 20px solid brown;
+            margin-top: -20px;
+        }
+
+        p {
+            text-align: justify;
+            margin: 10px 3px;
+        }
     </style>
 </head>
 <body>
-<p>ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя</p>
-<p>ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя</p>
+<div data-tooltip="Здесь домашний интерьер" id="house">
+    <div data-tooltip="Здесь крыша" id="roof"></div>
 
-<button data-tooltip="эта подсказка должна быть длиннее, чем элемент">Короткая кнопка</button>
-<button data-tooltip="HTML<br>подсказка">Ещё кнопка</button>
+    <p>Жили-были на свете три поросенка. Три брата. Все одинакового роста, кругленькие, розовые, с одинаковыми веселыми хвостиками.</p>
 
-<p>Прокрутите страницу, чтобы кнопки оказались у верхнего края, а затем проверьте правильно ли выводятся подсказки.</p>
+    <p>Даже имена у них были похожи. Звали поросят: Ниф-Ниф, Нуф-Нуф и Наф-Наф. Все лето они кувыркались в зеленой траве, грелись на солнышке, нежились в лужах.</p>
 
+    <p>Но вот наступила осень. Солнце уже не так сильно припекало, серые облака тянулись над пожелтевшим лесом.</p>
+
+    <p>- Пора нам подумать о зиме, - сказал как-то Наф-Наф. <a href="https://ru.wikipedia.org/wiki/%D0%A2%D1%80%D0%B8_%D0%BF%D0%BE%D1%80%D0%BE%D1%81%D1%91%D0%BD%D0%BA%D0%B0" data-tooltip="Читать далее…">Наведи курсор на меня</a></p>
+
+</div>
 
 <script>
     document.onmouseover = function(e) {
