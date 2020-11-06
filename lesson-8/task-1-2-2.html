@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="task-1-2-2.assets/bagua.css">
+    <link rel="stylesheet" href="task-1-2-2.assets/my.css">
+</head>
+<body>
+<p>Кликните на ячейку таблицы, чтобы отредактировать её. Нажмите ОК или ОТМЕНА, когда закончите.</p>
+
+<table id="bagua-table">
+    <tr>
+        <th colspan="3">Квадрат <em>Bagua</em>: Направление, Элемент, Цвет, Значение</th>
+    </tr>
+    <tr>
+        <td class="nw"><strong>Северо-Запад</strong>
+            <br>Металл
+            <br>Серебро
+            <br>Старейшины
+        </td>
+        <td class="n"><strong>Север</strong>
+            <br>Вода
+            <br>Синий
+            <br>Перемены
+        </td>
+        <td class="ne"><strong>Северо-Восток</strong>
+            <br>Земля
+            <br>Жёлтый
+            <br>Направление
+        </td>
+    </tr>
+    <tr>
+        <td class="w"><strong>Запад</strong>
+            <br>Металл
+            <br>Золото
+            <br>Молодость
+        </td>
+        <td class="c"><strong>Центр</strong>
+            <br>Всё
+            <br>Пурпурный
+            <br>Гармония
+        </td>
+        <td class="e"><strong>Восток</strong>
+            <br>Дерево
+            <br>Синий
+            <br>Будущее
+        </td>
+    </tr>
+    <tr>
+        <td class="sw"><strong>Юго-Запад</strong>
+            <br>Земля
+            <br>Коричневый
+            <br>Спокойствие
+        </td>
+        <td class="s"><strong>Юг</strong>
+            <br>Огонь
+            <br>Оранжевый
+            <br>Слава
+        </td>
+        <td class="se"><strong>Юго-Восток</strong>
+            <br>Дерево
+            <br>Зеленый
+            <br>Роман
+        </td>
+    </tr>
+
+</table>
+
+
+<script>
+    let table = document.getElementById('bagua-table');
+
+    table.addEventListener('click', function(e) {
+        if (table.classList.contains('edit-mode')) return;
+
+        let targetCell = e.target.closest('td');
+
+        if (!targetCell) return;
+
+        let content = targetCell.innerHTML;
+        targetCell.style.height = `${targetCell.clientHeight}px`;
+
+        let field = document.createElement('textarea');
+        field.value = content;
+
+        let cancelButton = document.createElement('button');
+        cancelButton.className = 'cancel-button';
+        cancelButton.textContent = 'Отмена';
+        cancelButton.addEventListener('click', cancelAction);
+
+        let saveButton = document.createElement('button');
+        saveButton.className = 'save-button';
+        saveButton.textContent = 'Ок';
+        saveButton.addEventListener('click', saveAction);
+
+        function cancelAction() {
+            targetCell.innerHTML = content;
+            destroy();
+        }
+
+        function saveAction() {
+            targetCell.innerHTML = field.value;
+            destroy();
+        }
+
+        function destroy() {
+            cancelButton.removeEventListener('click', cancelAction);
+            saveButton.removeEventListener('click', saveAction);
+            table.classList.remove('edit-mode');
+            targetCell.style.height = '';
+        }
+
+        targetCell.innerHTML = '';
+        targetCell.append(field);
+        targetCell.append(cancelButton);
+        targetCell.append(saveButton);
+        table.classList.add('edit-mode');
+    });
+</script>
+</body>
+</html>

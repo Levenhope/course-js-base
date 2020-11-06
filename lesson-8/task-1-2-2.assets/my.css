@@ -1,0 +1,24 @@
+textarea {
+    display: block;
+    width: 100%;
+    height: 100%;
+    vertical-align: top;
+    background-color: rgba(255,255,255, .5);
+    border: none;
+}
+td {
+    position: relative;
+    box-sizing: border-box;
+}
+button {
+    position: absolute;
+    z-index: 1000;
+    top:100%;
+    width: 50%;
+}
+.save-button {
+    right: 0;
+}
+.cancel-button {
+    left: 0;
+}

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #mutant {
+            width: 100px;
+            height: 20px;
+            background-color: lightblue;
+        }
+    </style>
+</head>
+<body>
+<div id="mutant"></div>
+
+<script>
+    mutant.addEventListener('click', mutateDiv);
+
+    function mutateDiv() {
+        if (mutant.tagName !== 'DIV') return;
+
+        let textarea = document.createElement('textarea');
+        textarea.id = 'mutant';
+        textarea.value = mutant.innerHTML;
+
+        mutant.removeEventListener('click', mutateDiv);
+        document.body.replaceChild(textarea, mutant);
+        mutant.focus();
+        mutant.addEventListener('keydown', onEnter);
+        mutant.addEventListener('blur', mutateTextarea);
+    }
+
+    function onEnter(e) {
+        if (e.code === 'Enter') {
+            e.preventDefault();
+            mutateTextarea();
+        }
+    }
+
+    function mutateTextarea() {
+        if (mutant.tagName !== 'TEXTAREA') return;
+
+        let div = document.createElement('div');
+        div.id = 'mutant';
+        div.innerHTML = mutant.value;
+
+        mutant.removeEventListener('blur', mutateTextarea);
+        document.body.replaceChild(div, mutant);
+        mutant.removeEventListener('keydown', onEnter);
+        mutant.addEventListener('click', mutateDiv);
+    }
+</script>
+</body>
+</html>

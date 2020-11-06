@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #mouse {
+            display: inline-block;
+            cursor: pointer;
+            margin: 0;
+        }
+
+        #mouse:focus {
+            outline: 1px dashed black;
+        }
+    </style>
+</head>
+<body>
+<p>Кликните по "изображению" мыши и перемещайте её с помощью клавиш со стрелками.</p>
+
+<pre id="mouse">
+ _   _
+(q\_/p)
+ /. .\
+=\_t_/=   __
+ /   \   (
+((   ))   )
+/\) (/\  /
+\  Y  /-'
+ nn^nn
+</pre>
+
+
+<script>
+    let currentCoords = mouse.getBoundingClientRect();
+    mouse.tabIndex = '0';
+    mouse.addEventListener('focus', initControls);
+    mouse.addEventListener('blur', destroyControls);
+
+    function initControls(){
+        mouse.addEventListener('keydown', controlMouse);
+
+        mouse.style.border = '1px dashed';
+        mouse.style.position = 'absolute';
+    }
+
+    function destroyControls(){
+        mouse.removeEventListener('keydown', controlMouse);
+        mouse.style.border = '';
+    }
+
+    function controlMouse(e) {
+        if (e.code !== 'ArrowUp' && e.code !== 'ArrowRight' && e.code !== 'ArrowDown' && e.code !== 'ArrowLeft') return;
+
+        const STEP = 10;
+
+        switch (e.code) {
+            case 'ArrowUp':
+                mouse.style.top = `${currentCoords.top - STEP}px`;
+                break;
+            case 'ArrowRight':
+                mouse.style.left = `${currentCoords.left + STEP}px`;
+                break;
+            case 'ArrowDown':
+                mouse.style.top = `${currentCoords.top + STEP}px`;
+                break;
+            case 'ArrowLeft':
+                mouse.style.left = `${currentCoords.left - STEP}px`;
+                break;
+        }
+
+        currentCoords = mouse.getBoundingClientRect();
+    }
+</script>
+</body>
+</html>
