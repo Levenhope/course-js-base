@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        form {
+            width: 400px;
+            margin: 0 auto;
+        }
+        label {
+            display: inline-block;
+            width: 150px;
+        }
+
+        textarea {
+            width: 100%;
+        }
+
+        .validation-failed {
+            border-color: red;
+        }
+    </style>
+</head>
+<body>
+<form action="send.php" novalidate>
+    <fieldset>
+        <label for="name">Ваше имя*</label>
+        <input type="text" id="name" name="name" required>
+        <br>
+        <label for="lastname">Ваша Фамилия*</label>
+        <input type="text" id="lastname" name="lastname" required>
+        <br>
+        <label for="age">Ваш возраст</label>
+        <input type="text" id="age" name="age" required>
+    </fieldset>
+    <br>
+    <fieldset>
+        <label for="message">Сообщение</label>
+        <br>
+        <textarea name="message" id="message" cols="30" rows="10"></textarea>
+    </fieldset>
+    <br>
+    <button>Отправить</button>
+</form>
+
+
+<script>
+    // Задача сделать ее обработку с валидацией через js
+    // Правила валидации
+    //
+    // Поле  Правило
+    // name  Обязательное
+    // lastname  Обязательное
+    // age  Обязательное, на ввод принимает только числа
+    // message  Обязательно, минимальная длина сообщения 15 символов.
+    //
+    // Eсли все поля корректно заполнены - выводить в консоль значения полей в формате json,
+    // выводить сообщение пользователю “Спасибо ФИО, Ваше сообщение принято!” и очищать форму.
+
+    let form = document.querySelector('form');
+
+    function validateField(field, condition) {
+        if (!condition) {
+            field.classList.add('validation-failed');
+        } else {
+            field.classList.remove('validation-failed');
+        }
+    }
+
+    function checkNumberKey(key) {
+        return ((key >= '0' && key <= '9') || key === 'ArrowLeft' || key === 'ArrowRight'
+            || key === 'Delete' || key === 'Backspace' || key === 'Tab');
+    }
+
+    function runChecks(field) {
+        if (field.required) validateField(field, field.value);
+        if (field.name === 'message') validateField(field, field.value.length > 14);
+    }
+
+    form.addEventListener('focusout', function(e) {
+        let field = e.target;
+        runChecks(field);
+    });
+
+    form.addEventListener('keydown', function(e) {
+        let field = e.target;
+
+        if (field.name === 'age' && !checkNumberKey(e.key)) {
+            e.preventDefault();
+        }
+    });
+
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        for (let field of form.elements) runChecks(field);
+
+        if (form.querySelector('.validation-failed')) {
+            alert('Неверно заполнены поля');
+        } else {
+            let formData = new FormData(form);
+            console.log(JSON.stringify(Object.fromEntries(Array.from(formData)), null, 2));
+            alert(`Спасибо, ${form.lastname.value} ${form.name.value}, Ваше сообщение принято!`);
+            for (let field of form.elements) {
+                field.value = '';
+            }
+        }
+    });
+
+</script>
+</body>
+</html>
