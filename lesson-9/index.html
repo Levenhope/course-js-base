@@ -1,0 +1,106 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+<div class="container pt-4">
+    <section class="article-list">
+        <h1>Recently articles</h1>
+        <div class="row">
+            <div class="col col-9">
+                <article class="card mb-2">
+                    <header class="card-header">Article 1</header>
+                    <div class="card-body">
+                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque deleniti
+                            doloremque
+                            dolorum nam nemo sapiente
+                            vero. Deleniti harum nostrum placeat praesentium vero? Asperiores dignissimos ducimus,
+                            fugiat illum
+                            odio
+                            similique voluptatem!</p>
+                    </div>
+                    <footer class="card-footer">
+                        <p class="card-text"> Author 1 <small class="article__pubdate text-muted">01.02.2019</small></p>
+                        <small>Likes:
+                            <button class="btn btn-sm btn-primary" title="Add like!">0</button>
+                        </small>
+                    </footer>
+                </article>
+                <article class="card mb-2">
+                    <header class="card-header">Article 1</header>
+                    <div class="card-body">
+                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque deleniti
+                            doloremque
+                            dolorum nam nemo sapiente
+                            vero. Deleniti harum nostrum placeat praesentium vero? Asperiores dignissimos ducimus,
+                            fugiat illum
+                            odio
+                            similique voluptatem!</p>
+                    </div>
+                    <footer class="card-footer">
+                        <p class="card-text"> Author 1 <small class="article__pubdate text-muted">01.02.2019</small></p>
+                        <small>Likes:
+                            <button class="btn btn-sm btn-primary" title="Add like!">0</button>
+                        </small>
+                    </footer>
+                </article>
+                <article class="card mb-2">
+                    <header class="card-header">Article 1</header>
+                    <div class="card-body">
+                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque deleniti
+                            doloremque
+                            dolorum nam nemo sapiente
+                            vero. Deleniti harum nostrum placeat praesentium vero? Asperiores dignissimos ducimus,
+                            fugiat illum
+                            odio
+                            similique voluptatem!</p>
+                    </div>
+                    <footer class="card-footer">
+                        <p class="card-text"> Author 1 <small class="article__pubdate text-muted">01.02.2019</small></p>
+                        <small>Likes:
+                            <button class="btn btn-sm btn-primary add-like" title="Add like!">0</button>
+                        </small>
+                    </footer>
+                </article>
+            </div>
+            <div class="col col-3">
+                <div class="card">
+                    <form action="add-article.php" class="mb-0">
+                        <div class="card-header">Add new article</div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="article-name">Article name</label>
+                                <input type="text" class="form-control" name="article-name" id="article-name">
+                            </div>
+                            <div class="form-group">
+                                <label for="article-text">Article text</label>
+                                <textarea name="article-name" class="form-control" id="article-text"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="article-author">Article author</label>
+                                <input type="text" class="form-control" name="article-author" id="article-author">
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-primary" id="add-article-button">Add article</button>
+                        </div>
+                    </form>
+                </div>
+                <button class="btn btn-primary" id="show-form-block">show form</button>
+            </div>
+        </div>
+    </section>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<script src="scripts.js"></script>
+</body>
+</html>
