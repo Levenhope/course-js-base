@@ -1,0 +1,14 @@
+.main-slider, .thumb-slider {
+    max-width: 600px;
+    width: 100%;
+    margin: auto;
+}
+.slick-slide {
+    height: auto;
+}
+img {
+    width: 100%;
+}
+.slick-prev:before, .slick-next:before {
+    color: black;
+}
